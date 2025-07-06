@@ -1,11 +1,21 @@
-import { Button } from "@/components/ui/button";
-
+import HeroSection from "@/components/ui/common/hero";
+import BgGradient from "@/components/ui/common/bg-gradient";
+import DemoSection from "@/components/ui/common/demo";
+import HowItWorksSection from "@/components/ui/common/how-it-works";
+import PricingSection from "@/components/ui/common/pricing";
+import CTASection from "@/components/ui/common/cta";
 
 export default function Home() {
-
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-(family-name:--font-geist-sans)">
-      <Button variant="outline" size="lg">Upload</Button>
+    <div className="relative w-full">
+      <BgGradient />
+      <div className="flex flex-col mb-20">
+        <HeroSection />
+      </div>
+      <DemoSection />
+      <HowItWorksSection />
+      <PricingSection />
+      <CTASection />
     </div>
   );
 }
