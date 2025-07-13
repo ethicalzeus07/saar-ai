@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { auth } from '@clerk/nextjs/server';
 import { checkTotalLimit } from '@/lib/summaries';
 
+export const runtime = 'edge';
+
 export async function GET() {
   try {
     console.log('Total limit API: Starting request...');

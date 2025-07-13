@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { auth } from '@clerk/nextjs/server';
 import { checkDailyLimit } from '@/lib/summaries';
 
+export const runtime = 'edge';
+
 export async function GET() {
   try {
     console.log('Daily limit API: Starting request...');
