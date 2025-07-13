@@ -76,7 +76,7 @@ export async function generateSummaryFromMistral(pdfText: string): Promise<strin
         temperature: 0.7,
         max_tokens: 1500,
       }),
-    }, 27000);
+    }, 55000);
 
     if (res.status === 429) {
       throw new Error("RATE_LIMIT_EXCEEDED");
