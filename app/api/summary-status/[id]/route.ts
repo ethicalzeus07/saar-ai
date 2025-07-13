@@ -2,8 +2,6 @@ import { NextResponse } from 'next/server';
 import { auth } from '@clerk/nextjs/server';
 import { getSummaryById } from '@/lib/summaries';
 
-export const runtime = 'edge';
-
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
