@@ -122,18 +122,22 @@
   }
   body {
     @apply bg-background text-foreground;
+    /* Improve text rendering on mobile */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
   
   h1 {
-    @apply text-4xl md:text-6xl xl:text-7xl font-bold;
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold leading-tight;
   }
   
   h2 {
-    @apply text-xl lg:text-3xl font-medium;
+    @apply text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-medium leading-tight;
   }
   
   h3 {
-    @apply text-2xl lg:text-4xl font-medium;
+    @apply text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-medium leading-tight;
   }
   
   a {
@@ -142,7 +146,49 @@
   
   button {
     @apply hover:cursor-pointer bg-primary hover:bg-primary/90 text-primary-foreground;
+    /* Ensure minimum touch target size on mobile */
+    min-height: 44px;
+    min-width: 44px;
   }
+
+  /* Improve form elements for mobile */
+  input, textarea, select {
+    @apply text-base;
+    /* Prevent zoom on iOS */
+    font-size: 16px;
+  }
+
+  /* Better focus states for accessibility */
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible,
+  a:focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2;
+  }
+
+  /* Custom scrollbar for webkit browsers */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-100 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 rounded-full hover:bg-gray-400;
+  }
+
+  /* Improve line-clamp utility */
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
   @keyframes gradient-x {
     0%,
     100% {
@@ -170,14 +216,146 @@
   select:focus-visible {
     box-shadow: 0 0 0 2px oklch(0.9 0.18 122), 0 0 8px oklch(0.9 0.18 122 / 0.3);
   }
-}
-@utility container {
-  margin-inline: auto;
-  padding-inline: 2rem;
-  @media (width >= --theme(--breakpoint-sm)) {
-    max-width: none;
+
+  /* Mobile-specific improvements */
+  @media (max-width: 640px) {
+    /* Ensure proper spacing on mobile */
+    .container {
+      @apply px-4;
+    }
+    
+    /* Improve touch targets */
+    button, a, [role="button"] {
+      min-height: 48px;
+      min-width: 48px;
+    }
+    
+    /* Better text sizing for mobile */
+    h1 {
+      @apply text-xl sm:text-2xl;
+    }
+    
+    h2 {
+      @apply text-sm sm:text-base;
+    }
+    
+    h3 {
+      @apply text-base sm:text-lg;
+    }
+    
+    /* Improve form elements on mobile */
+    input, textarea, select {
+      font-size: 16px; /* Prevent zoom on iOS */
+      padding: 12px 16px;
+    }
+    
+    /* Better spacing for mobile cards */
+    .card {
+      @apply p-4;
+    }
   }
+
+  /* Tablet-specific improvements */
+  @media (min-width: 641px) and (max-width: 1024px) {
+    .container {
+      @apply px-6;
+    }
+    
+    /* Medium touch targets for tablets */
+    button, a, [role="button"] {
+      min-height: 44px;
+      min-width: 44px;
+    }
+  }
+
+  /* Desktop improvements */
+  @media (min-width: 1025px) {
+    .container {
+      @apply px-8;
+    }
+  }
+
+  /* Large screen improvements */
+  @media (min-width: 1400px) {
+    .container {
+      @apply px-12;
+    }
+  }
+
+  /* Responsive breakpoints */
+  @media (width >= --theme(--breakpoint-sm)) {
+    .container { @apply px-6; }
+  }
+
+  @media (width >= --theme(--breakpoint-md)) {
+    .container { @apply px-8; }
+  }
+
+  @media (width >= --theme(--breakpoint-lg)) {
+    .container { @apply px-12; }
+  }
+
   @media (width >= 1400px) {
-    max-width: 1400px;
+    .container { @apply px-16; }
+  }
+
+  /* Animation keyframes */
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+  }
+
+  .fade-out {
+    animation: fadeOut 0.4s ease-out forwards;
+  }
+
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out forwards;
+  }
+
+  /* Additional responsive utilities */
+  .xs\:hidden {
+    @media (max-width: 639px) {
+      display: none;
+    }
+  }
+
+  .xs\:inline {
+    @media (max-width: 639px) {
+      display: inline;
+    }
+  }
+
+  /* Loading states */
+  .loading {
+    @apply animate-pulse bg-gray-200 rounded;
+  }
+
+  /* Disable hover effects on touch devices */
+  @media (hover: none) {
+    .hover\:scale-105:hover {
+      transform: none;
+    }
+    
+    .hover\:shadow-xl:hover {
+      box-shadow: none;
+    }
   }
 }

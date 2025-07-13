@@ -1,35 +1,52 @@
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Clock } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import BgGradient from "./bg-gradient";
+import { 
+  MotionSection, 
+  MotionDiv, 
+  MotionH2, 
+  MotionP, 
+  MotionSpan,
+  fadeInUp,
+  scaleIn
+} from "./motion-wrapper";
 
 export default function CTASection() {
   return (
-    <section className="bg-gray-50 py-12">
-      <div className="py-12 lg:py-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center justify-center space-y-4 text-center">
-          <div className="space-y-2">
-            <Clock className="h-12 w-12 text-primary mb-2 drop-shadow-lg animate-pulse mx-auto" />
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-              Ready to Save Hours of Reading Time?
-            </h2>
-          </div>
-          <p className="mx-auto max-w-2xl text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-            Transform lengthy documents into clear, actionable insights with our AI-powered summarizer.
-          </p>
-        </div>
-        <div className="flex flex-col gap-2 min-[400px]:flex-row justify-center mt-8">
-          <Button
-            size="lg"
-            className="w-full min-[400px]:w-auto bg-gradient-to-r from-lime-400 via-orange-400 to-primary hover:from-lime-500 hover:via-orange-500 hover:to-primary text-white transition-all duration-300"
-            asChild
+    <BgGradient>
+      <MotionSection 
+        className="py-16 sm:py-20 lg:py-24"
+        variants={scaleIn}
+        initial="initial"
+        animate="animate"
+      >
+        <MotionDiv className="container mx-auto px-4 text-center">
+          <MotionH2 
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary mb-4 sm:mb-6"
+            variants={fadeInUp}
           >
-            <Link href="#pricing" className="flex items-center justify-center">
-              Get Started
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
-        </div>
-      </div>
-    </section>
+            Ready to Get Started?
+          </MotionH2>
+          <MotionP 
+            className="text-lg sm:text-xl text-muted-foreground mb-8 sm:mb-10 max-w-2xl mx-auto"
+            variants={fadeInUp}
+          >
+            Join users who are already saving time with Saar-ai summaries.
+          </MotionP>
+          <Link href="#pricing" prefetch={true} className="flex items-center justify-center">
+            <Button
+              size="lg"
+              className="bg-gradient-to-r from-primary to-yellow-400 hover:from-primary hover:to-yellow-400 text-white font-semibold px-8 sm:px-10 py-3 sm:py-4 rounded-lg text-lg sm:text-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+            >
+              <MotionSpan className="flex items-center gap-2">
+                Get Started Now
+                <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6" />
+              </MotionSpan>
+            </Button>
+          </Link>
+        </MotionDiv>
+      </MotionSection>
+    </BgGradient>
   );
 }
